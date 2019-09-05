@@ -1,0 +1,25 @@
+{
+  "name": "WebsiteIP",
+  "description": "Display the IP(s) of the current tab's URL",
+  "version": "1.0",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/floreo/WebsiteIP",
+  "permissions": [
+	"activeTab",
+	"dns"
+  ],
+  "icons": {
+    "48": "icons/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "theme_icons": [{
+        "light": "icons/icon.png",
+        "dark": "icons/icon.png",
+        "size": 48
+    }],
+	"browser_style": true,
+    "default_title": "Website IP",
+    "default_popup": "popup/websiteip.html"
+  }
+}
