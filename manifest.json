@@ -1,6 +1,6 @@
 {
   "name": "WebsiteIP",
-  "description": "Display the IP(s) of the current tab's URL",
+  "description": "Display the IP(s) of the current tab URL",
   "version": "1.0",
   "manifest_version": 2,
   "homepage_url": "https://github.com/floreo/WebsiteIP",
