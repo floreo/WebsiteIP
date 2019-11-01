@@ -1,0 +1,47 @@
+#websiteip_information{
+	font-size: 1.2em;
+	text-align: center;
+	margin: 0;
+	padding: 5px;
+}
+#websiteip_information p{
+	text-align:center;
+}
+.ok{
+	color: #33CC99;	
+}
+.info{
+	background-color: #87CEFA;
+}
+.warning{
+	color: #CC3333;
+}
+table{
+	margin: 0;
+	border-collapse: collapse;
+	empty-cells: hide;
+}
+table tr:hover {
+	background-color: #ddd;
+}
+table td, table th{
+  border: 1px solid white;
+  padding: 5px;
+}
+table th{
+	padding: 5px;
+	background-color: #B0C4DE;
+	color: white;
+}
+tr:nth-child(even){
+	background-color: #f2f2f2;
+}
+table th, table td{
+	border-bottom: 1px solid white;
+	text-align: center;
+}
+table td{
+	cursor: text;
+	user-select: all;
+	-moz-user-select: all;	
+}
