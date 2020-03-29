@@ -17,13 +17,13 @@
 	function websiteip_display(hostname, dns_type, local_content, remote_content){
 		if(Array.isArray(local_content.addresses) && 
 			Array.isArray(remote_content.addresses)){
-			local_content.addresses.sort();
-			remote_content.addresses.sort();
-			
-			let max_length = remote_content.addresses.length;
-			if(local_content.addresses.length >= remote_content.addresses.length)
-				max_length = local_content.addresses.length;
-		
+			// intersection of local and remote resolution
+			let intersection = local_content.addresses.filter(element => remote_content.addresses.includes(element));
+			// only local resolution without the intersection
+			let localonly = local_content.addresses.filter(element => !intersection.includes(element));
+			// only remote resolution without the intersection
+			let remoteonly = remote_content.addresses.filter(element => !intersection.includes(element));
+
 			let table = document.createElement('table');
 			let tr = document.createElement('tr');
 			let th_local = document.createElement('th');
@@ -36,28 +36,39 @@
 			th_status.textContent = 'Status';
 			tr.appendChild(th_status);
 			table.appendChild(tr);
-				
-			for(var i = 0; i < max_length; ++i){
-				let addresses_local = (local_content.addresses[i])?local_content.addresses[i]:'';
-				let addresses_remote = (remote_content.addresses[i])?remote_content.addresses[i]:'';
-
+			
+			for(var i = 0 ; i < intersection.length ; i++){
 				let tr = document.createElement('tr');
 				let td_local = document.createElement('td');
-				td_local.textContent = addresses_local;
+				td_local.textContent = intersection[i];
 				let td_remote = document.createElement('td');
-				td_remote.textContent = addresses_remote;	
+				td_remote.textContent = intersection[i];	
 				let td_status = document.createElement('td');
-				td_status.textContent = '✘';
-				td_status.className = 'warning';
-				if(addresses_local === addresses_remote){
-					td_status.textContent = '✔';
-					td_status.className = 'ok';
-				}
+				td_status.textContent = '✔';
+				td_status.className = 'ok';
 				tr.appendChild(td_local);
 				tr.appendChild(td_remote);
 				tr.appendChild(td_status);
-				table.appendChild(tr);
+				table.appendChild(tr);				
 			}
+			
+			[localonly, remoteonly].forEach(function(item, index){
+				for(var i = 0 ; i < item.length ; i++){
+					let tr = document.createElement('tr');
+					let td_local = document.createElement('td');
+					td_local.textContent = (index % 2 === 0)?item[i]:'-';
+					let td_remote = document.createElement('td');
+					td_remote.textContent = (index % 2 !== 0)?item[i]:'-';
+					let td_status = document.createElement('td');
+					td_status.textContent = '✘';
+					td_status.className = 'warning';
+					tr.appendChild(td_local);
+					tr.appendChild(td_remote);
+					tr.appendChild(td_status);
+					table.appendChild(tr);				
+				}
+			});
+	
 			document.getElementById('websiteip_information').appendChild(table);
 			
 			let p = document.createElement('p');
