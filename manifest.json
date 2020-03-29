@@ -9,13 +9,12 @@
 	"dns"
   ],
   "icons": {
-    "64": "icons/icon.png"
+    "64": "icons/dark-icon.png"
   },
   "browser_action": {
-    "default_icon": "icons/icon.png",
     "theme_icons": [{
-        "light": "icons/icon.png",
-        "dark": "icons/icon.png",
+		"dark": "icons/dark-icon.png",
+        "light": "icons/light-icon.png",
         "size": 64
     }],
 	"browser_style": true,
