@@ -1,10 +1,12 @@
 (function(global){ 
 	'use strict';
 
+	/**
+	 resolve a hostname based on network.trr.mode, it could use the local resolver or DOH
+	 **/
 	function websiteip_resolve(hostname, dns_type = 'A'){
 		let parameters = [
 			'priority_medium',
-			'disable_trr',
 			'bypass_cache',
 		];
 		if(dns_type == 'A')
@@ -27,7 +29,7 @@
 			let table = document.createElement('table');
 			let tr = document.createElement('tr');
 			let th_local = document.createElement('th');
-			th_local.textContent = 'Local';
+			th_local.textContent = 'Local'+((local_content.isTRR)?' (TRR)':'');
 			tr.appendChild(th_local);
 			let th_remote = document.createElement('th');
 			th_remote.textContent = 'Remote';	
