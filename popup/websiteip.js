@@ -1,4 +1,4 @@
-(function(global){ 
+(function(global){
 	'use strict';
 
 	/**
@@ -17,7 +17,7 @@
 	}
 
 	function websiteip_display(hostname, dns_type, local_content, remote_content){
-		if(Array.isArray(local_content.addresses) && 
+		if(Array.isArray(local_content.addresses) &&
 			Array.isArray(remote_content.addresses)){
 			// intersection of local and remote resolution
 			let intersection = local_content.addresses.filter(element => remote_content.addresses.includes(element));
@@ -32,28 +32,28 @@
 			th_local.textContent = 'Local'+((local_content.isTRR)?' (TRR)':'');
 			tr.appendChild(th_local);
 			let th_remote = document.createElement('th');
-			th_remote.textContent = 'Remote';	
+			th_remote.textContent = 'Remote';
 			tr.appendChild(th_remote);
 			let th_status = document.createElement('th');
 			th_status.textContent = 'Status';
 			tr.appendChild(th_status);
 			table.appendChild(tr);
-			
+
 			for(var i = 0 ; i < intersection.length ; i++){
 				let tr = document.createElement('tr');
 				let td_local = document.createElement('td');
 				td_local.textContent = intersection[i];
 				let td_remote = document.createElement('td');
-				td_remote.textContent = intersection[i];	
+				td_remote.textContent = intersection[i];
 				let td_status = document.createElement('td');
 				td_status.textContent = '✔';
 				td_status.className = 'ok';
 				tr.appendChild(td_local);
 				tr.appendChild(td_remote);
 				tr.appendChild(td_status);
-				table.appendChild(tr);				
+				table.appendChild(tr);
 			}
-			
+
 			[localonly, remoteonly].forEach(function(item, index){
 				for(var i = 0 ; i < item.length ; i++){
 					let tr = document.createElement('tr');
@@ -67,19 +67,27 @@
 					tr.appendChild(td_local);
 					tr.appendChild(td_remote);
 					tr.appendChild(td_status);
-					table.appendChild(tr);				
+					table.appendChild(tr);
 				}
 			});
-	
+
 			document.getElementById('websiteip_information').appendChild(table);
-			
+
 			let p = document.createElement('p');
 			let a = document.createElement('a');
-			a.href = 'https://www.whatsmydns.net/#'+dns_type+'/'+hostname;
-			a.title = 'https://www.whatsmydns.net/ ' + dns_type + ' ' + hostname;
-			a.textContent = hostname;
+			a.href = 'https://www.nslookup.io/dns-records/'+hostname;
+			a.title = 'Show all DNS records for ' + hostname;
+			a.textContent = 'NsLookup.io';
 			p.appendChild(a);
 			document.getElementById('websiteip_information').appendChild(p);
+
+			let p2 = document.createElement('p');
+			let a2 = document.createElement('a');
+			a2.href = 'https://www.whatsmydns.net/#'+dns_type+'/'+hostname;
+			a2.title = 'Show ' + dns_type + ' records for ' + hostname;
+			a2.textContent = 'WhatsMyDNS.net';
+			p2.appendChild(a2);
+			document.getElementById('websiteip_information').appendChild(p2);
 		}
 	}
 
@@ -88,7 +96,7 @@
 		active: true
 	})
 	.then((tabs) => {
-		let hostname = new URL(tabs[0].url).hostname;	
+		let hostname = new URL(tabs[0].url).hostname;
 		let detect_ipv6 = fetch('https://ipv6.google.com', {mode: 'no-cors',});
 		detect_ipv6.then(function(){
 			return 'AAAA';
@@ -109,7 +117,7 @@
 						if(el.type == 1 || el.type == 28)
 							remote_record.addresses.push(el.data);
 					});
-					websiteip_display(hostname, dns_type, local_record, remote_record);					
+					websiteip_display(hostname, dns_type, local_record, remote_record);
 				});
 			}).catch(function(message){
 				document.getElementById('websiteip_information').textContent = message;

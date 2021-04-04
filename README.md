@@ -28,7 +28,7 @@ For anyone that cares about privacy here's a list of [DOH server](https://github
 
 # Whatsmydns
 
-WebsiteIP is not affiliated to [whatsmydns.net](https://www.whatsmydns.net/) but it's a decent service that I've been using on a daily basis therefore this extension uses it as link to further debug any DNS problem.
+WebsiteIP is not affiliated to [nslookup.io](https://www.nslookup.io/) and [whatsmydns.net](https://www.whatsmydns.net/) but they're decent services that I've been using on a daily basis therefore this extension uses it as link to further debug any DNS problem.
 
 # Credits
 
